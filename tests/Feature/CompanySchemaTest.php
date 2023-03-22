@@ -9,6 +9,7 @@ use Tests\TestCase;
 class CompanySchemaTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * Our app has a Company model which musty exist and match a specified schema
      */
