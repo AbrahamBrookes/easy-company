@@ -15,7 +15,7 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         return [
             'name' => fake()->name(),
@@ -29,10 +29,21 @@ class UserFactory extends Factory
     /**
      * Indicate that the model's email address should be unverified.
      */
-    public function unverified(): static
+    public function unverified()
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
+
+	/**
+	 * A state for spawning an admin user
+	 */
+	public function admin()
+	{
+		return $this->state(fn (array $attributes) => [
+			'is_admin' => true,
+		]);
+	}
+
 }
