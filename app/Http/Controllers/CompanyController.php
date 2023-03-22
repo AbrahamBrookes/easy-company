@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use App\Http\Resources\CompanyResource;
 
 class CompanyController extends Controller
 {
@@ -13,9 +14,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        // return a light list (only name and id_ paginated 10 per page
+        // paginated 10 per page
         return inertia('Company/Index', [
-            'companies' => Company::select('id', 'name')->paginate(10),
+            'companies' => CompanyResource::collection(Company::paginate(10)),
         ]);
     }
 

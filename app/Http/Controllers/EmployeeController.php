@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
+use App\Http\Resources\EmployeeResource;
 
 class EmployeeController extends Controller
 {
@@ -13,9 +14,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        // light list (just name and id) paginated 10 per page
+        // paginated 10 per page
         return inertia('Employee/Index', [
-            'employees' => Employee::select('id', 'first_name', 'last_name')->paginate(10),
+            'employees' => EmployeeResource::collection(Employee::paginate(10)),
         ]);
     }
 
