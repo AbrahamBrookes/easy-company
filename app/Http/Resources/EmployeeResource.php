@@ -21,6 +21,9 @@ class EmployeeResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'company_id' => $this->company_id,
+            'company' => $this->whenLoaded('company', function () {
+                return new CompanyResource($this->company);
+            }),
         ];
     }
 }
