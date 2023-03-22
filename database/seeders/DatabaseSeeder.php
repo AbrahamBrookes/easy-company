@@ -12,11 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // if we are in a local or testing environment, run the local dev seeder
+        if (app()->environment('local', 'testing')) {
+            $this->call(LocalDevSeeder::class);
+        }
     }
 }
