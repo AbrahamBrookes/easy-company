@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
 
     // resource routes for Company
     Route::resource('companies', \App\Http\Controllers\CompanyController::class);
+
+    // resource routes for Employee
+    Route::resource('employees', \App\Http\Controllers\EmployeeController::class);
 });
 
 require __DIR__.'/auth.php';
