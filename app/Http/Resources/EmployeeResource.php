@@ -21,6 +21,6 @@ class EmployeeResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'company_id' => $this->company_id,
-        ]
+        ];
     }
 }
