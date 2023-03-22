@@ -122,4 +122,83 @@ class EmployeeResourceRoutesTest extends TestCase
             });
         });
     }
+
+    /**
+     * Store /employees
+     * - should persist the data
+     * - should redirect to the show route
+     * - should be an inertia response
+     * - should return the new employees data
+     */
+    public function test_store_employee_route_persists_data()
+    {
+        // spawn a company so we can get its id
+        $company = \App\Models\Company::factory()->create();
+
+        // spawn an employee
+        $employee = \App\Models\Employee::factory()
+            ->for($company)
+            ->make();
+
+        // go to store
+        $response = $this->post('/employees', $employee->toArray());
+
+        // check that the employee was created
+        $this->assertDatabaseHas('employees', $employee->toArray());
+    }
+
+    public function test_store_employee_route_redirects_to_show_route()
+    {
+        // spawn a company so we can get its id
+        $company = \App\Models\Company::factory()->create();
+
+        // spawn an employee
+        $employee = \App\Models\Employee::factory()
+            ->for($company)
+            ->make();
+
+        // store
+        $response = $this->post('/employees', $employee->toArray());
+
+        // find the employee in the database
+        $employee = \App\Models\Employee::where('email', $employee->email)->first();
+
+        // check that we were redirected to the show route
+        $response->assertRedirect('/employees/' . $employee->id);
+    }
+
+    public function test_store_employee_route_has_employee_data()
+    {
+        // spawn a company so we can get its id
+        $company = \App\Models\Company::factory()->create();
+
+        // spawn an employee
+        $employee = \App\Models\Employee::factory()
+            ->for($company)
+            ->make();
+
+        // store
+        $response = $this->post('/employees', $employee->toArray());
+
+        // find the employee in the database
+        $employee = \App\Models\Employee::where('email', $employee->email)->first();
+
+        $redirectedResponse = $this->followRedirects($response);
+
+        $redirectedResponse->assertInertia(function ($inertia) use ($employee) {
+            $inertia->has('employee.data', function ($inertia) use ($employee) {
+                $inertia->where('id', $employee->id);
+                $inertia->where('first_name', $employee->first_name);
+                $inertia->where('last_name', $employee->last_name);
+                $inertia->where('email', $employee->email);
+                $inertia->where('phone', $employee->phone);
+                $inertia->where('company_id', $employee->company_id);
+                $inertia->has('company');
+            });
+        });
+    }
+
+
+
+
 }

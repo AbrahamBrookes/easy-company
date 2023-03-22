@@ -118,4 +118,71 @@ class CompanyResourceRoutesTest extends TestCase
         });
     }
 
+    /**
+     * Store /companies
+     * - should persist the data
+     * - should redirect to the show route
+     * - should be an inertia response
+     * - should have the company data
+     */
+    public function test_store_company_route_serves_ok()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->make();
+
+        // fudge an image file as the logo - validator requires minimum 100 x 100
+        $company->logo = \Illuminate\Http\UploadedFile::fake()->image('logo.png', 100, 100);
+
+        // store it
+        $response = $this->post('/companies', $company->toArray());
+
+        // check that the company was created
+        $this->assertDatabaseHas('companies', $company->toArray());
+    }
+
+    public function test_store_company_route_redirects_to_show_route()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->make();
+
+        // fudge an image file as the logo
+        $company->logo = \Illuminate\Http\UploadedFile::fake()->image('logo.png', 100, 100);
+
+        // store
+        $response = $this->post('/companies', $company->toArray());
+
+        // find the company in the database
+        $company = \App\Models\Company::where('email', $company->email)->first();
+
+        // check that we were redirected to the show route
+        $response->assertRedirect('/companies/' . $company->id);
+    }
+
+    public function test_store_company_route_has_company_data()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->make();
+
+        // fudge an image file as the logo
+        $company->logo = \Illuminate\Http\UploadedFile::fake()->image('logo.png', 100, 100);
+
+        // store
+        $response = $this->post('/companies', $company->toArray());
+
+        // find the company in the database
+        $company = \App\Models\Company::where('email', $company->email)->first();
+
+        $redirectedResponse = $this->followRedirects($response);
+
+        $redirectedResponse->assertInertia(function ($inertia) use ($company) {
+            $inertia->has('company.data', function ($inertia) use ($company) {
+                $inertia->where('id', $company->id);
+                $inertia->where('name', $company->name);
+                $inertia->where('email', $company->email);
+                $inertia->where('website', $company->website);
+                $inertia->has('employees');
+                $inertia->has('logo');
+            });
+        });
+    }
 }
