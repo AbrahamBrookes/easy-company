@@ -38,7 +38,7 @@ class EmployeeController extends Controller
     {
         // show our inertia Pages/Employee/Show view
         return inertia('Employee/Show', [
-            'employee' => $employee,
+            'employee' => new EmployeeResource($employee->load('company')),
         ]);
     }
 
