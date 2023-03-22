@@ -38,7 +38,7 @@ class CompanyController extends Controller
     {
         // show our inertia Pages/Company/Show view
         return inertia('Company/Show', [
-            'company' => $company,
+            'company' => new CompanyResource($company->load('employees')),
         ]);
     }
 
