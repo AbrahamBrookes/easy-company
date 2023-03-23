@@ -61,6 +61,21 @@ class EmployeeResourceRoutesTest extends TestCase
     }
 
     /**
+     * Create /employees/create
+     * - should be an inertia response
+     * - that's it really
+     */
+    public function test_create_employee_route_serves_ok()
+    {
+        // go to create
+        $response = $this->get('/employees/create');
+
+        $response->assertStatus(200);
+
+        $response->assertInertia();
+    }
+
+    /**
      * Show /employees/{id}
      *  - should be an inertia response
      *  - should have the employee data

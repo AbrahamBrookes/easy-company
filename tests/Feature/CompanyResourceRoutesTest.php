@@ -56,6 +56,21 @@ class CompanyResourceRoutesTest extends TestCase
     }
 
     /**
+     * Create /companies/create
+     * - should be an inertia response
+     * - that's it really
+     */
+    public function test_create_company_route_serves_ok()
+    {
+        // go to create
+        $response = $this->get('/companies/create');
+
+        $response->assertStatus(200);
+
+        $response->assertInertia();
+    }
+
+    /**
      * Show /companies/{id}
      *  - should be an inertia response
      *  - should have the company data
