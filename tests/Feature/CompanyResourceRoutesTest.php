@@ -71,69 +71,6 @@ class CompanyResourceRoutesTest extends TestCase
     }
 
     /**
-     * Show /companies/{id}
-     *  - should be an inertia response
-     *  - should have the company data
-     *  - should have the company's employees
-     */
-    public function test_show_company_route_serves_ok()
-    {
-        // spawn a company
-        $company = \App\Models\Company::factory()->create();
-
-        // go to show
-        $response = $this->get('/companies/' . $company->id);
-
-        $response->assertStatus(200);
-    }
-
-    public function test_show_company_route_has_company_data()
-    {
-        // spawn a company
-        $company = \App\Models\Company::factory()->create();
-
-        // go to show
-        $response = $this->get('/companies/' . $company->id);
-
-        $response->assertInertia(function ($inertia) use ($company) {
-            // values match
-            $inertia->where('company.data.id', $company->id);
-            $inertia->where('company.data.name', $company->name);
-            $inertia->where('company.data.logo', $company->logo);
-            $inertia->where('company.data.website', $company->website);
-            $inertia->where('company.data.email', $company->email);
-            $inertia->has('company.data.employees');
-        });
-    }
-
-    public function test_show_company_route_has_company_employees()
-    {
-        // spawn a company
-        $company = \App\Models\Company::factory()
-            ->has(\App\Models\Employee::factory()->count(10))
-            ->create();
-
-        // spawn 10 employees
-        \App\Models\Employee::factory()->count(10)->for($company)->create();
-
-        // go to show
-        $response = $this->get('/companies/' . $company->id);
-
-        $response->assertInertia(function ($inertia) {
-            $inertia->has('company.data.employees');
-
-            $inertia->has('company.data.employees.0', function ($inertia) {
-                $inertia->has('id');
-                $inertia->has('first_name');
-                $inertia->has('last_name');
-                $inertia->has('email');
-                $inertia->has('phone');
-                $inertia->has('company_id');
-            });
-        });
-    }
-
-    /**
      * Store /companies
      * - should persist the data
      * - should redirect to the show route
@@ -197,6 +134,69 @@ class CompanyResourceRoutesTest extends TestCase
                 $inertia->where('website', $company->website);
                 $inertia->has('employees');
                 $inertia->has('logo');
+            });
+        });
+    }
+
+    /**
+     * Show /companies/{id}
+     *  - should be an inertia response
+     *  - should have the company data
+     *  - should have the company's employees
+     */
+    public function test_show_company_route_serves_ok()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->create();
+
+        // go to show
+        $response = $this->get('/companies/' . $company->id);
+
+        $response->assertStatus(200);
+    }
+
+    public function test_show_company_route_has_company_data()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->create();
+
+        // go to show
+        $response = $this->get('/companies/' . $company->id);
+
+        $response->assertInertia(function ($inertia) use ($company) {
+            // values match
+            $inertia->where('company.data.id', $company->id);
+            $inertia->where('company.data.name', $company->name);
+            $inertia->where('company.data.logo', $company->logo);
+            $inertia->where('company.data.website', $company->website);
+            $inertia->where('company.data.email', $company->email);
+            $inertia->has('company.data.employees');
+        });
+    }
+
+    public function test_show_company_route_has_company_employees()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()
+            ->has(\App\Models\Employee::factory()->count(10))
+            ->create();
+
+        // spawn 10 employees
+        \App\Models\Employee::factory()->count(10)->for($company)->create();
+
+        // go to show
+        $response = $this->get('/companies/' . $company->id);
+
+        $response->assertInertia(function ($inertia) {
+            $inertia->has('company.data.employees');
+
+            $inertia->has('company.data.employees.0', function ($inertia) {
+                $inertia->has('id');
+                $inertia->has('first_name');
+                $inertia->has('last_name');
+                $inertia->has('email');
+                $inertia->has('phone');
+                $inertia->has('company_id');
             });
         });
     }
