@@ -2,7 +2,7 @@
 {{-- Header --}}
 <x-slot:header>
 <x-mail::header :url="config('app.url')">
-{{ config('app.name') }}
+<img src="{{ asset('images/logo.svg') }}" alt="{{ config('app.name') }}" width="200" height="100">
 </x-mail::header>
 </x-slot:header>
 
