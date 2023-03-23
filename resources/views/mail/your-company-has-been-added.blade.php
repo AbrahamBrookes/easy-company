@@ -1,13 +1,11 @@
 <x-mail::message>
 
-<img src="{{ asset('images/logo.svg') }}" alt="{{ config('app.name') }}" width="100" height="100">
+# {{ $company->name }} has been added to the {{ config('app.name') }} platform.
 
-# You have been added to the {{ config('app.name') }} platform.
+Easy Company is a neat and tidy way to manage companies and employees. Check it out:
 
-The body of your message.
-
-<x-mail::button :url="''">
-Button Text
+<x-mail::button :url="config('app.url') . '/companies/' . $company->id">
+View your profile
 </x-mail::button>
 
 Thanks,<br>
