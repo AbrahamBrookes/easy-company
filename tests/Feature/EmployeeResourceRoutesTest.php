@@ -294,4 +294,69 @@ class EmployeeResourceRoutesTest extends TestCase
         // check that we were redirected to the index route
         $response->assertRedirect('/employees');
     }
+
+    /**
+     * We must be authenticated to access any of these resource routes
+     */
+    public function test_resource_routes_require_authentication()
+    {
+        // create an employee
+        $employee = \App\Models\Employee::factory()
+            ->for(\App\Models\Company::factory())
+            ->create();
+
+        // log out
+        auth()->logout();
+
+        // index
+        $response = $this->get('/employees');
+        $response->assertRedirect('/login');
+
+        // create
+        $response = $this->get('/employees/create');
+        $response->assertRedirect('/login');
+
+        // store
+        $response = $this->post('/employees', $employee->toArray());
+        $response->assertRedirect('/login');
+
+        // show
+        $response = $this->get('/employees/1');
+        $response->assertRedirect('/login');
+
+        // update
+        $response = $this->put('/employees/1', $employee->toArray());
+        $response->assertRedirect('/login');
+
+        // delete
+        $response = $this->delete('/employees/1');
+        $response->assertRedirect('/login');
+
+        // log back in
+        $this->actingAs(\App\Models\User::factory()->admin()->create());
+
+        // index
+        $response = $this->get('/employees');
+        $response->assertStatus(200);
+
+        // create
+        $response = $this->get('/employees/create');
+        $response->assertStatus(200);
+
+        // store
+        $response = $this->post('/employees', $employee->toArray());
+        $response->assertStatus(302);
+
+        // show
+        $response = $this->get('/employees/1');
+        $response->assertStatus(200);
+
+        // update
+        $response = $this->put('/employees/1', $employee->toArray());
+        $response->assertStatus(302);
+
+        // delete
+        $response = $this->delete('/employees/1');
+        $response->assertStatus(302);
+    }
 }

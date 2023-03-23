@@ -264,4 +264,70 @@ class CompanyResourceRoutesTest extends TestCase
         // check that we were redirected to the index route
         $response->assertRedirect('/companies');
     }
+
+    /**
+     * We must be authenticated to access any of these resource routes
+     */
+    public function test_resource_routes_require_authentication()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->make();
+
+        // fudge an image file as the logo
+        $company->logo = \Illuminate\Http\UploadedFile::fake()->image('logo.png', 100, 100);
+
+        // log out
+        auth()->logout();
+
+        // index
+        $response = $this->get('/companies');
+        $response->assertRedirect('/login');
+
+        // create
+        $response = $this->get('/companies/create');
+        $response->assertRedirect('/login');
+
+        // store
+        $response = $this->post('/companies', $company->toArray());
+        $response->assertRedirect('/login');
+
+        // show
+        $response = $this->get('/companies/1');
+        $response->assertRedirect('/login');
+
+        // update
+        $response = $this->put('/companies/1', $company->toArray());
+        $response->assertRedirect('/login');
+
+        // delete
+        $response = $this->delete('/companies/1');
+        $response->assertRedirect('/login');
+
+        // log back in
+        $this->actingAs(\App\Models\User::factory()->admin()->create());
+
+        // index
+        $response = $this->get('/companies');
+        $response->assertStatus(200);
+
+        // create
+        $response = $this->get('/companies/create');
+        $response->assertStatus(200);
+
+        // store
+        $response = $this->post('/companies', $company->toArray());
+        $response->assertStatus(302);
+
+        // show
+        $response = $this->get('/companies/1');
+        $response->assertStatus(200);
+
+        // update
+        $response = $this->put('/companies/1', $company->toArray());
+        $response->assertStatus(302);
+
+        // delete
+        $response = $this->delete('/companies/1');
+        $response->assertStatus(302);
+    }
 }
