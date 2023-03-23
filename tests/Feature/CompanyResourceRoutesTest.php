@@ -235,4 +235,33 @@ class CompanyResourceRoutesTest extends TestCase
         // check that we were redirected to the show route
         $response->assertRedirect('/companies/' . $company->id);
     }
+
+    /**
+     * Delete /companies/{id}
+     * - should delete the company
+     * - should redirect to the index route
+     */
+    public function test_delete_company_route_deletes_company()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->create();
+
+        // delete
+        $response = $this->delete('/companies/' . $company->id);
+
+        // check that the company was deleted (softdelete)
+        $this->assertSoftDeleted('companies', $company->toArray());
+    }
+
+    public function test_delete_company_route_redirects_to_index_route()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->create();
+
+        // delete
+        $response = $this->delete('/companies/' . $company->id);
+
+        // check that we were redirected to the index route
+        $response->assertRedirect('/companies');
+    }
 }

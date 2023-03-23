@@ -262,8 +262,36 @@ class EmployeeResourceRoutesTest extends TestCase
         $response->assertRedirect('/employees/' . $employee->id);
     }
 
+    /**
+     * Delete /employees/{id}
+     * - should delete the employee
+     * - should redirect to the index route
+     */
+    public function test_delete_employee_route_deletes_employee()
+    {
+        // spawn an employee
+        $employee = \App\Models\Employee::factory()
+            ->for(\App\Models\Company::factory())
+            ->create();
 
+        // go to delete
+        $response = $this->delete('/employees/' . $employee->id);
 
+        // check that the employee was deleted (softdelete)
+        $this->assertSoftDeleted('employees', $employee->toArray());
+    }
 
+    public function test_delete_employee_route_redirects_to_index_route()
+    {
+        // spawn an employee
+        $employee = \App\Models\Employee::factory()
+            ->for(\App\Models\Company::factory())
+            ->create();
 
+        // go to delete
+        $response = $this->delete('/employees/' . $employee->id);
+
+        // check that we were redirected to the index route
+        $response->assertRedirect('/employees');
+    }
 }
