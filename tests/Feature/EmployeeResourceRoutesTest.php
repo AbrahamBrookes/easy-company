@@ -321,7 +321,7 @@ class EmployeeResourceRoutesTest extends TestCase
         $response->assertRedirect('/login');
 
         // show
-        $response = $this->get('/employees/1');
+        $response = $this->get('/employees/' . $employee->id);
         $response->assertRedirect('/login');
 
         // update
@@ -329,7 +329,7 @@ class EmployeeResourceRoutesTest extends TestCase
         $response->assertRedirect('/login');
 
         // delete
-        $response = $this->delete('/employees/1');
+        $response = $this->delete('/employees/' . $employee->id);
         $response->assertRedirect('/login');
 
         // log back in
@@ -348,15 +348,15 @@ class EmployeeResourceRoutesTest extends TestCase
         $response->assertStatus(302);
 
         // show
-        $response = $this->get('/employees/1');
+        $response = $this->get('/employees/' . $employee->id);
         $response->assertStatus(200);
 
         // update
-        $response = $this->put('/employees/1', $employee->toArray());
+        $response = $this->put('/employees/' . $employee->id, $employee->toArray());
         $response->assertStatus(302);
 
         // delete
-        $response = $this->delete('/employees/1');
+        $response = $this->delete('/employees/' . $employee->id);
         $response->assertStatus(302);
     }
 }
