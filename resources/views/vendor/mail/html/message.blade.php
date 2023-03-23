@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css?family=Almarai&display=swap" rel="stylesheet">
 <x-mail::layout>
 {{-- Header --}}
 <x-slot:header>
