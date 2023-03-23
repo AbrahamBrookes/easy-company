@@ -47,7 +47,7 @@ class Kernel extends HttpKernel
         ],
 
         'dev' => [
-            \App\Http\Middleware\DevMiddleware::class,
+            \App\Http\Middleware\DevEnvironmentOnly::class,
         ],
     ];
 
