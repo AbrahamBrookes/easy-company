@@ -213,6 +213,56 @@ class EmployeeResourceRoutesTest extends TestCase
         });
     }
 
+    /**
+     * Update /employees/{id}
+     * - should persist the data
+     * - should redirect to the show route
+     */
+    public function test_update_employee_route_persists_data()
+    {
+        // spawn an employee
+        $employee = \App\Models\Employee::factory()
+            ->for(\App\Models\Company::factory())
+            ->create();
+
+        // spawn a new company
+        $newCompany = \App\Models\Company::factory()->create();
+
+        // spawn a new employee
+        $newEmployee = \App\Models\Employee::factory()
+            ->for($newCompany)
+            ->make();
+
+        // go to update
+        $response = $this->put('/employees/' . $employee->id, $newEmployee->toArray());
+
+        // check that the employee was updated
+        $this->assertDatabaseHas('employees', $newEmployee->toArray());
+    }
+
+    public function test_update_employee_route_redirects_to_show_route()
+    {
+        // spawn an employee
+        $employee = \App\Models\Employee::factory()
+            ->for(\App\Models\Company::factory())
+            ->create();
+
+        // spawn a new company
+        $newCompany = \App\Models\Company::factory()->create();
+
+        // spawn a new employee
+        $newEmployee = \App\Models\Employee::factory()
+            ->for($newCompany)
+            ->make();
+
+        // go to update
+        $response = $this->put('/employees/' . $employee->id, $newEmployee->toArray());
+
+        // check that we were redirected to the show route
+        $response->assertRedirect('/employees/' . $employee->id);
+    }
+
+
 
 
 

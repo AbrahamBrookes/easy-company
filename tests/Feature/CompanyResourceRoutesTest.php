@@ -200,4 +200,39 @@ class CompanyResourceRoutesTest extends TestCase
             });
         });
     }
+
+    /**
+     * Update /companies/{id}
+     * - should persist the data
+     * - should redirect to the show route
+     */
+    public function test_update_company_route_persists_data()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->create();
+
+        // fudge an image file as the logo
+        $company->logo = \Illuminate\Http\UploadedFile::fake()->image('logo.png', 100, 100);
+
+        // update
+        $response = $this->put('/companies/' . $company->id, $company->toArray());
+
+        // check that the company was updated
+        $this->assertDatabaseHas('companies', $company->toArray());
+    }
+
+    public function test_update_company_route_redirects_to_show_route()
+    {
+        // spawn a company
+        $company = \App\Models\Company::factory()->create();
+
+        // fudge an image file as the logo
+        $company->logo = \Illuminate\Http\UploadedFile::fake()->image('logo.png', 100, 100);
+
+        // update
+        $response = $this->put('/companies/' . $company->id, $company->toArray());
+
+        // check that we were redirected to the show route
+        $response->assertRedirect('/companies/' . $company->id);
+    }
 }
