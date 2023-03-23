@@ -21,6 +21,15 @@ class CompanyController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        // show our inertia Pages/Company/Create view
+        return inertia('Company/Create');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCompanyRequest $request)

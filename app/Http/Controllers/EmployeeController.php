@@ -21,6 +21,15 @@ class EmployeeController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        // show our inertia Pages/Employee/Create view
+        return inertia('Employee/Create');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreEmployeeRequest $request)
