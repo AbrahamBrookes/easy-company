@@ -2,20 +2,9 @@
 import { ref, watch, onMounted } from 'vue';
 import { SunIcon, MoonIcon } from '@heroicons/vue/24/outline';
 
-const props = defineProps({
-    checked: {
-        type: Boolean,
-        required: true,
-    },
-});
-
-const emit = defineEmits(['update:checked']);
-
-const _checked = ref(props.checked);
+const _checked = ref(false);
 
 const toggleTo = (val) => {
-    emit('update:checked', _checked.value);
-
     if (_checked.value) {
         document.documentElement.classList.add('dark');
         localStorage.theme = 'dark'
