@@ -11,6 +11,14 @@
         <link href="https://fonts.bunny.net/css?family=almarai:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        <script>
+            // adding inline in head to avoid FOUC
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        </script>
         @routes
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 		<script src="{{ mix('js/app.js') }}" defer></script>

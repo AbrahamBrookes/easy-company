@@ -6,6 +6,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import Link from '@/Components/Link.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import DarkModeToggle from '@/Components/DarkModeToggle.vue';
 
 const showingNavigationDropdown = ref(false);
 
@@ -163,4 +164,5 @@ const props = defineProps({
             <p class="text-gray-500">Please <Link href="/login">login</Link> to continue</p>
         </div>
     </div>
+    <DarkModeToggle class="!absolute bottom-6 right-3" />
 </template>
