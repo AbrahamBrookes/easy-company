@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Http\Resources\CompanyResource;
+use Inertia\Inertia;
 
 class CompanyController extends Controller
 {
@@ -15,7 +16,7 @@ class CompanyController extends Controller
     public function index()
     {
         // paginated 10 per page
-        return inertia('Company/Index', [
+        return Inertia::render('Company/Index', [
             'companies' => CompanyResource::collection(Company::paginate(10)),
         ]);
     }
@@ -26,7 +27,7 @@ class CompanyController extends Controller
     public function create()
     {
         // show our inertia Pages/Company/Create view
-        return inertia('Company/Create');
+        return Inertia::render('Company/Create');
     }
 
     /**
@@ -46,7 +47,7 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         // show our inertia Pages/Company/Show view
-        return inertia('Company/Show', [
+        return Inertia::render('Company/Show', [
             'company' => new CompanyResource($company->load('employees')),
         ]);
     }

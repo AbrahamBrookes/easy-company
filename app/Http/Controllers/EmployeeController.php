@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use App\Http\Resources\EmployeeResource;
+use Inertia\Inertia;
 
 class EmployeeController extends Controller
 {
@@ -15,7 +16,7 @@ class EmployeeController extends Controller
     public function index()
     {
         // paginated 10 per page
-        return inertia('Employee/Index', [
+        return Inertia::render('Employee/Index', [
             'employees' => EmployeeResource::collection(Employee::paginate(10)),
         ]);
     }
@@ -26,7 +27,7 @@ class EmployeeController extends Controller
     public function create()
     {
         // show our inertia Pages/Employee/Create view
-        return inertia('Employee/Create');
+        return Inertia::render('Employee/Create');
     }
 
     /**
@@ -46,7 +47,7 @@ class EmployeeController extends Controller
     public function show(Employee $employee)
     {
         // show our inertia Pages/Employee/Show view
-        return inertia('Employee/Show', [
+        return Inertia::render('Employee/Show', [
             'employee' => new EmployeeResource($employee->load('company')),
         ]);
     }
