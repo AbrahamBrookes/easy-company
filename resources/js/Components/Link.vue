@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3';
 
 <template>
     <Link class="
-        underline text-indigo-800
+        underline text-indigo-800 dark:text-indigo-400
         inline
         hover:text-indigo-600
         cursor-pointer
