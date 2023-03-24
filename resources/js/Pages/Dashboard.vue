@@ -22,6 +22,20 @@ const props = defineProps({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!--
+                    Some intro text, full width card
+                -->
+                <div class="mb-8">
+                    <Card>
+                        <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            Welcome to the Easy Company App
+                        </h1>
+                        <p class="mt-2 text-gray-700 dark:text-gray-400">
+                            This is a simple CRUD app built with Laravel and Inertia.js
+                        </p>
+                    </Card>
+                </div>
+
+                <!--
                     a 4 col responsive layout with two widgets:
                     - num companies
                     - num employees
