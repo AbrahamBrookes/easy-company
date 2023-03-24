@@ -1,3 +1,4 @@
+import { app } from '@storybook/vue3';
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,3 +8,9 @@ export const parameters = {
     },
   },
 }
+
+app.mixin({
+	methods: {
+		route: (name) => name ? '#' : { current: () => !!Math.round(Math.random()), },
+	}
+});
