@@ -1,22 +1,76 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3'
+import Link from "@/Components/Link"
+import Card from "@/Components/Card"
+
+const props = defineProps({
+    numCompanies: {
+        type: Number,
+        required: true,
+    },
+    numEmployees: {
+        type: Number,
+        required: true,
+    },
+});
 </script>
 
 <template>
-    <Head title="Dashboard" />
-
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>
-        </template>
+    <div id="Dashboard">
+        <Head title="Dashboard" />
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
+                <!--
+                    a 4 col responsive layout with two widgets:
+                    - num companies
+                    - num employees
+                    Each with links to their relevant list pages
+                -->
+                <div class="
+                    grid md:grid-cols-4 sm:grid-cols-2 gap-8
+                ">
+                    <Link
+                        href="/companies"
+                        class="
+                            hover:shadow-xl transition-shadow
+                            no-underline
+                        "
+                    >
+                        <Card>
+                            <h1 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{  numCompanies }}</h1>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">
+                                Currently registered companies
+                            </p>
+                            <hr class="my-4" />
+                            <div class="text-right">
+                                <Link href="/companies">View all</Link>
+                            </div>
+                        </Card>
+                    </Link>
+
+                    <Link
+                        href="/employees"
+                        class="
+                            hover:shadow-xl transition-shadow
+                            no-underline
+                        "
+                    >
+                        <Card>
+                            <h1 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{  numEmployees }}</h1>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">
+                                Currently registered employees
+                            </p>
+                            <hr class="my-4" />
+                            <div class="text-right">
+                                <Link href="/employees">View all</Link>
+                            </div>
+                        </Card>
+                    </Link>
+
+
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </div>
 </template>
