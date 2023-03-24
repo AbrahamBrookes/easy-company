@@ -1,5 +1,6 @@
 <script setup>
-import ModelList from '@/Components/ModelList'
+import ModelList from '@/Components/Company/ModelList'
+import Content from '@/Components/Content'
 
 const props = defineProps({
     companies: {
@@ -11,5 +12,9 @@ const props = defineProps({
 </script>
 
 <template>
-    <ModelList :items="companies" />
+    <Content>
+        <ModelList
+            :items="companies.data"
+        />
+    </Content>
 </template>
