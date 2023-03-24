@@ -6,6 +6,9 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
+// get from env
+const appName = process.env.MIX_APP_NAME;
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => {
