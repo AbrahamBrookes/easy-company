@@ -164,5 +164,5 @@ const props = defineProps({
             <p class="text-gray-500">Please <Link href="/login">login</Link> to continue</p>
         </div>
     </div>
-    <DarkModeToggle class="!absolute bottom-6 right-3" />
+    <DarkModeToggle class="!fixed bottom-6 right-6" />
 </template>
