@@ -16,6 +16,7 @@ module.exports = {
   },
   "webpackFinal": async (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname, '../resources/js');
+    config.resolve.alias['fixtures'] = path.resolve(__dirname, '../stories/Fixtures');
     return config;
   },
 }
