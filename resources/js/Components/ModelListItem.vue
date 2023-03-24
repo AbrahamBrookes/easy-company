@@ -1,14 +1,20 @@
 <script setup>
+import Link from '@/Components/Link'
+
 const props = defineProps({
     item: {
         type: Object,
         required: true,
     },
+    href: {
+        type: String,
+        default: false,
+    },
 })
 </script>
 <template>
-    <li class="pb-3 sm:pb-4">
-        <div class="flex items-center space-x-4">
+    <li class="py-2 sm:py-3">
+        <component :is="href ? Link : 'div'" class="flex items-center space-x-4 no-underline">
             <div class="flex-shrink-0">
                 <slot name="image">
                     <img class="w-8 h-8" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
@@ -29,6 +35,6 @@ const props = defineProps({
                     $320
                 </slot>
             </div>
-        </div>
+        </component>
     </li>
 </template>
