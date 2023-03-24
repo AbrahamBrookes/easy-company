@@ -44,6 +44,6 @@ onMounted(() => {
         <MoonIcon class="p-[4px] w-6 h-6 text-blue-500 transition-all dark:opacity-100 opacity-0" />
         <SunIcon class="p-[2px] w-6 h-6 text-yellow-500 transition-all dark:opacity-0 opacity-100" />
 		<input type="checkbox" v-model="_checked" class="sr-only peer">
-		<div class="w-11 h-6 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+		<div class="rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
 	</label>
 </template>
