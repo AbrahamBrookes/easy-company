@@ -15,8 +15,12 @@ export const parameters = {
 
 app.mixin({
 	methods: {
-		route: (name) => name ? '#' : { current: () => !!Math.round(Math.random()), },
+		// mock Ziggy
+		route: (name) => name ? '#' : {
+			current: () => true,
+		}
 	}
-});
+})
+
 
 app.component(Link)
