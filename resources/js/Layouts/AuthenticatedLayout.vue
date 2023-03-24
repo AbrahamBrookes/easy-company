@@ -13,7 +13,7 @@ const showingNavigationDropdown = ref(false);
 const props = defineProps({
     auth: {
         type: Object,
-        required: true,
+        default: false
     },
 });
 </script>
@@ -158,10 +158,13 @@ const props = defineProps({
             </main>
         </div>
     </div>
-    <div v-else class="w-full h-[100vh] flex justify-center items-center">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold">You are not logged in</h1>
-            <p class="text-gray-500">Please <Link href="/login">login</Link> to continue</p>
+    <div v-else>
+        <slot />
+        <div class="w-full h-[100vh] flex justify-center items-center">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold">You are not logged in</h1>
+                <p class="text-gray-500">Please <Link href="/login">login</Link> to continue</p>
+            </div>
         </div>
     </div>
     <DarkModeToggle class="!fixed bottom-6 right-6" />
