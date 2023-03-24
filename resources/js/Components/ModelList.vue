@@ -8,8 +8,9 @@ const props = defineProps({
     },
 })
 </script>
+
 <template>
-    <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+    <ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">
         <ModelListItem v-for="item in items" :key="item.id" :item="item" />
     </ul>
 </template>
