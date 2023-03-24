@@ -13,7 +13,7 @@ const showingNavigationDropdown = ref(false);
 const props = defineProps({
     auth: {
         type: Object,
-        default: false
+        default: () => false
     },
 });
 </script>
