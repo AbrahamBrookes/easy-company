@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('email');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->string('website');
             $table->softDeletes();
         });
