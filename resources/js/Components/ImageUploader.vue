@@ -8,13 +8,21 @@
  */
 import { ref, computed } from 'vue'
 
+const props = defineProps({
+    // the url to an existing image
+    url: {
+        type: String,
+        default: null
+    },
+})
+
 const emits = defineEmits(['file'])
 
 const image = ref(null)
 // if we have no image, we use a placeholder
 const placeholder = 'https://via.placeholder.com/250/edeffb?text=Minimum+100x100'
 // a display image to show in the preview
-const displayImage = computed(() => image.value || placeholder)
+const displayImage = computed(() => image.value || props.url  || placeholder)
 
 const handleFileChange = (event) => {
     const file = event.target.files[0]
