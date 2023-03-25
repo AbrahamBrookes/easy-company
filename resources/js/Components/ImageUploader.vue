@@ -19,6 +19,14 @@ const displayImage = computed(() => image.value || placeholder)
 const handleFileChange = (event) => {
     const file = event.target.files[0]
     emits('file', file)
+
+    // FileReader the image into the preview src
+    const reader = new FileReader()
+    reader.onload = (e) => {
+        image.value = e.target.result
+    }
+    reader.readAsDataURL(file)
+
 }
 
 </script>
