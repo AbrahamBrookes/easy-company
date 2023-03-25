@@ -8,6 +8,8 @@
  */
 import { ref, computed } from 'vue'
 
+const emits = defineEmits(['file'])
+
 const image = ref(null)
 // if we have no image, we use a placeholder
 const placeholder = 'https://via.placeholder.com/250/edeffb?text=Minimum+100x100'
@@ -16,7 +18,7 @@ const displayImage = computed(() => image.value || placeholder)
 
 const handleFileChange = (event) => {
     const file = event.target.files[0]
-    $emit('file', file)
+    emits('file', file)
 }
 
 </script>
