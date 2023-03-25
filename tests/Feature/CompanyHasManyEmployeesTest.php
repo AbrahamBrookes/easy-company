@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Company;
+use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -17,7 +20,7 @@ class CompanyHasManyEmployeesTest extends TestCase
     {
         parent::setUp();
 
-        $this->actingAs(\App\Models\User::factory()->admin()->create());
+        $this->actingAs(User::factory()->admin()->create());
     }
 
     /**
@@ -26,10 +29,10 @@ class CompanyHasManyEmployeesTest extends TestCase
     public function test_company_has_many_employees()
     {
         // factory up a company
-        $company = \App\Models\Company::factory()->create();
+        $company = Company::factory()->create();
 
         // factory up 5 employees for the company
-        $employees = \App\Models\Employee::factory()
+        $employees = Employee::factory()
             ->count(5)
             ->for($company)
             ->create();
@@ -44,10 +47,10 @@ class CompanyHasManyEmployeesTest extends TestCase
     public function test_company_show_route_fetches_employees()
     {
         // factory up a company
-        $company = \App\Models\Company::factory()->create();
+        $company = Company::factory()->create();
 
         // factory up 5 employees for the company
-        $employees = \App\Models\Employee::factory()
+        $employees = Employee::factory()
             ->count(5)
             ->for($company)
             ->create();
@@ -57,7 +60,7 @@ class CompanyHasManyEmployeesTest extends TestCase
 
         // assert that the company's employees are also fetched
         $response->assertInertia(function ($inertia) use ($employees) {
-            $inertia->has('company.data', function ($company) use ($employees) {
+            $inertia->has('company', function ($company) use ($employees) {
                 $company->has('employees', $employees->count());
                 $company->has('id');
                 $company->has('name');

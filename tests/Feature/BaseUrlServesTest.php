@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use App\Models\User;
 use Tests\TestCase;
 
 class BaseUrlServesTest extends TestCase
@@ -12,8 +14,17 @@ class BaseUrlServesTest extends TestCase
      */
     public function test_the_application_returns_a_successful_response(): void
     {
+        // home page should redirect to login
         $response = $this->get('/');
+        $response->assertStatus(302);
+        $response->assertRedirect('/login');
 
-        $response->assertStatus(200);
+        // login as admin
+        $response = $this->actingAs(User::factory()->admin()->create())->get('/');
+
+        // should redirect to dashboard
+        $response = $this->get('/');
+        $response->assertStatus(302);
+        $response->assertRedirect('/dashboard');
     }
 }
