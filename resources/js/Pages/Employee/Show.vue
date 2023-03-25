@@ -49,15 +49,6 @@ function destroy() {
                 <H2>
                     {{ form.first_name }} {{ form.last_name }}
                 </H2>
-                <div class="flex">
-                    <button
-                        @click="save"
-                        type="button"
-                        class="ml-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150"
-                    >
-                        Save
-                    </button>
-                </div>
             </div>
 
             <form class="mt-4" @submit.stop.prevent="save">
@@ -119,6 +110,15 @@ function destroy() {
 
                         <InputError class="mt-2" :message="form.errors.phone" />
                     </div>
+                </div>
+                <div class="text-right mt-4">
+                    <PrimaryButton
+                        @click="save"
+                        type="button"
+                        class="ml-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150"
+                    >
+                        Save
+                    </PrimaryButton>
                 </div>
             </form>
         </Card>
