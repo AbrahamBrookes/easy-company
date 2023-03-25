@@ -129,7 +129,7 @@ function destroy() {
             </form>
         </Card>
 
-        <Card>
+        <Card class="mt-5">
             <h2 class="text-xl font-bold text-gray-700 dark:text-gray-200">
                 {{  form.name }} employees
             </h2>
