@@ -57,7 +57,21 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        $company->update($request->validated());
+        $company->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'website' => $request->website,
+            'logo' => $request->logo,
+        ]);
+
+        // if we have an 'upload' key, handle file upload
+        if ($request->hasFile('upload')) {
+            // delete the old logo from storage
+            $company->deleteLogo();
+
+            // save the new logo to storage
+            $company->saveLogo($request->file('upload'));
+        }
 
         // redirect to show
         return redirect()->route('companies.show', $company);
