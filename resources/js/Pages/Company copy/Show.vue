@@ -14,8 +14,6 @@ import TextInput from '@/Components/Elements/TextInput.vue';
 import PrimaryButton from '@/Components/Elements/PrimaryButton.vue';
 import ImageUploader from '@/Components/ImageUploader.vue';
 
-import EmployeesList from '@/Components/Employee/ModelList.vue';
-
 const props = defineProps({
     company: {
         type: Array,
@@ -44,14 +42,6 @@ function setFile(file) {
     form.upload = file
 }
 
-function destroy() {
-    if( ! confirm("Are you sure you want to delete this record?")) return
-
-    form.delete(route('companies.destroy', props.company.id), {
-        preserveScroll: true
-    })
-}
-
 </script>
 
 <template>
@@ -62,6 +52,12 @@ function destroy() {
                     {{ form.name }}
                 </h2>
                 <div class="flex">
+                    <button
+                        type="button"
+                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150"
+                    >
+                        Delete
+                    </button>
                     <button
                         @click="save"
                         type="button"
@@ -127,24 +123,7 @@ function destroy() {
                     </div>
                 </div>
             </form>
+
         </Card>
-
-        <Card>
-            <h2 class="text-xl font-bold text-gray-700 dark:text-gray-200">
-                {{  form.name }} employees
-            </h2>
-
-            <EmployeesList :items="form.employees" />
-        </Card>
-
-        <div class="my-5 text-right">
-            <button
-                @click="destroy"
-                type="button"
-                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-200 hover:bg-red-400 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-400 transition ease-in-out duration-150"
-            >
-                Delete this record
-            </button>
-        </div>
     </Content>
 </template>

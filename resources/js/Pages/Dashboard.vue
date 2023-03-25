@@ -1,7 +1,7 @@
 <script setup>
 import { Head } from '@inertiajs/vue3'
-import Link from "@/Components/Link"
-import Card from "@/Components/Card"
+import Link from "@/Components/Elements/Link"
+import Card from "@/Components/Elements/Card"
 
 const props = defineProps({
     numCompanies: {

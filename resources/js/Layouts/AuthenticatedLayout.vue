@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import Link from '@/Components/Link.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import ApplicationLogo from '@/Components/Elements/ApplicationLogo.vue';
+import Dropdown from '@/Components/Elements/Dropdown.vue';
+import DropdownLink from '@/Components/Elements/DropdownLink.vue';
+import NavLink from '@/Components/Elements/NavLink.vue';
+import Link from '@/Components/Elements/Link.vue';
+import ResponsiveNavLink from '@/Components/Elements/ResponsiveNavLink.vue';
 import DarkModeToggle from '@/Components/DarkModeToggle.vue';
 
 const showingNavigationDropdown = ref(false);

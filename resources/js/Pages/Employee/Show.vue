@@ -7,11 +7,13 @@ import { ref, watchEffect } from 'vue'
 import { useForm, router } from '@inertiajs/vue3'
 
 import Content from '@/Components/Content'
-import Card from '@/Components/Card'
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Card from '@/Components/Elements/Card'
+import InputError from '@/Components/Elements/InputError.vue';
+import InputLabel from '@/Components/Elements/InputLabel.vue';
+import TextInput from '@/Components/Elements/TextInput.vue';
+import PrimaryButton from '@/Components/Elements/PrimaryButton.vue';
+
+import CompaniesList from '@/Components/Company/ModelList.vue';
 
 const props = defineProps({
     employee: {
@@ -119,6 +121,15 @@ function destroy() {
                 </div>
             </form>
         </Card>
+
+        <Card>
+            <h2 class="text-xl font-bold text-gray-700 dark:text-gray-200">
+                {{ form.first_name }} {{ form.last_name }} works at:
+            </h2>
+
+            <CompaniesList :items="[form.company]" />
+        </Card>
+
 
         <div class="my-5 text-right">
             <button

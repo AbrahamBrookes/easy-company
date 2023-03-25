@@ -1,5 +1,5 @@
 <script setup>
-import Link from '@/Components/Link'
+import Link from '@/Components/Elements/Link'
 
 const props = defineProps({
     item: {
