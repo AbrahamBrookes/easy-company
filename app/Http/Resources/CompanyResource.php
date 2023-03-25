@@ -7,6 +7,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CompanyResource extends JsonResource
 {
+    // don't wrap the resource in a data key since we're using Inertia
+    public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *
