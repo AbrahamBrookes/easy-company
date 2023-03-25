@@ -29,5 +29,8 @@ Default.args = {
             name: 'Test User',
         }
     },
-    employee: fixtures.employees[0]
+    employee: {
+        ...fixtures.employees[0],
+        company: fixtures.companies[0],
+    }
 }
