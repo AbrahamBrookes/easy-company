@@ -96,7 +96,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        // delete the company as well as its logo from storage
+        // companies are softdeleted so don't delete their logo in case we need to restore them
         $company->delete();
 
         // redirect to index
