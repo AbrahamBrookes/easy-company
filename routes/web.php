@@ -40,6 +40,9 @@ Route::middleware('auth')->group(function () {
 
     // resource routes for Employee
     Route::resource('employees', \App\Http\Controllers\EmployeeController::class);
+
+    // a route for creating employees with a pre-selected company
+    Route::get('/companies/{company}/employees/create', [\App\Http\Controllers\EmployeeController::class, 'create'])->name('employees.create.for-company');
 });
 
 require __DIR__.'/auth.php';
