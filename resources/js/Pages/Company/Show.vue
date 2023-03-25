@@ -19,7 +19,7 @@ import EmployeesList from '@/Components/Employee/ModelList.vue';
 
 const props = defineProps({
     company: {
-        type: Array,
+        type: Object,
         required: true,
     },
 })
