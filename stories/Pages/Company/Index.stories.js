@@ -29,5 +29,8 @@ Default.args = {
             name: 'Test User',
         }
     },
-    companies: fixtures.companies,
+    // this is a paginated resource on index, which laravel will always wrap
+    companies: {
+        data: fixtures.companies,
+    }
 }
