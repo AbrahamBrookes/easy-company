@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use App\Http\Resources\EmployeeResource;
+use App\Models\Company;
 use Inertia\Inertia;
 
 class EmployeeController extends Controller
@@ -27,7 +28,9 @@ class EmployeeController extends Controller
     public function create()
     {
         // show our inertia Pages/Employee/Create view
-        return Inertia::render('Employee/Create');
+        return Inertia::render('Employee/Create', [
+            'companies' => Company::select("id", "name")->get(),
+        ]);
     }
 
     /**
