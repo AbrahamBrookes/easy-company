@@ -14,7 +14,7 @@ const props = defineProps({
 })
 
 function create(){
-    router.visit(route('employees/create'))
+    router.visit(route('employees.create'))
 }
 
 
