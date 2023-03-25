@@ -13,6 +13,7 @@ import InputLabel from '@/Components/Elements/InputLabel.vue';
 import TextInput from '@/Components/Elements/TextInput.vue';
 import PrimaryButton from '@/Components/Elements/PrimaryButton.vue';
 import ImageUploader from '@/Components/ImageUploader.vue';
+import H2 from '@/Components/Elements/H2.vue';
 
 import EmployeesList from '@/Components/Employee/ModelList.vue';
 
@@ -58,9 +59,9 @@ function destroy() {
     <Content>
         <Card>
             <div class="flex justify-between">
-                <h2 class="text-xl font-bold text-gray-700 dark:text-gray-200">
+                <H2>
                     {{ form.name }}
-                </h2>
+                </H2>
                 <div class="flex">
                     <button
                         @click="save"
@@ -130,9 +131,9 @@ function destroy() {
         </Card>
 
         <Card class="mt-5">
-            <h2 class="text-xl font-bold text-gray-700 dark:text-gray-200">
+            <H2>
                 {{  form.name }} employees
-            </h2>
+            </H2>
 
             <EmployeesList :items="form.employees" />
         </Card>
