@@ -4,7 +4,7 @@
  */
 
 import { ref, watchEffect } from 'vue'
-import { useForm } from '@inertiajs/vue3'
+import { useForm, router } from '@inertiajs/vue3'
 
 import Content from '@/Components/Content'
 import Card from '@/Components/Card'
@@ -12,6 +12,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import ImageUploader from '@/Components/ImageUploader.vue';
 
 const props = defineProps({
     company: {
@@ -20,12 +21,25 @@ const props = defineProps({
     },
 })
 
-const form = useForm(props.company)
+const form = useForm({
+    ...props.company,
+    upload: null,
+})
 
 function save() {
-    form.put(route('companies.update', {company: props.company.id }), {
+    // uploading the form is using a put route but we need to use post and fudge the method
+    form.transform((data) => ({
+        ...data,
+        _method: 'PUT',
+    }))
+    .post(route('companies.update', props.company.id), {
         preserveScroll: true,
+        forceFormData: true
     })
+}
+
+function setFile(file) {
+    form.upload = file
 }
 
 </script>
@@ -56,48 +70,56 @@ function save() {
 
             <form class="mt-4" @submit.stop.prevent="save">
                 <input type="submit" class="hidden" />
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div>
-                        <InputLabel for="name" value="Name" />
-
-                        <TextInput
-                            id="name"
-                            type="name"
-                            class="mt-1 block w-full"
-                            v-model="form.name"
-                            required
-                            autofocus
-                        />
-
-                        <InputError class="mt-2" :message="form.errors.name" />
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-8">
+                    <div class="md:col-span-2 sm:col-span-8 relative">
+                        <ImageUploader :url="form.logo" @file="setFile" />
+                        <InputError class="mt-2" :message="form.errors.upload" />
                     </div>
-                    <div>
-                        <InputLabel for="email" value="Email" />
+                    <div class="md:col-span-6 sm:col-span-8">
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                            <div>
+                                <InputLabel for="name" value="Name" />
 
-                        <TextInput
-                            id="email"
-                            type="email"
-                            class="mt-1 block w-full"
-                            v-model="form.email"
-                            required
-                            autofocus
-                        />
+                                <TextInput
+                                    id="name"
+                                    type="name"
+                                    class="mt-1 block w-full"
+                                    v-model="form.name"
+                                    required
+                                    autofocus
+                                />
 
-                        <InputError class="mt-2" :message="form.errors.email" />
-                    </div>
-                    <div>
-                        <InputLabel for="website" value="Website" />
+                                <InputError class="mt-2" :message="form.errors.name" />
+                            </div>
+                            <div>
+                                <InputLabel for="email" value="Email" />
 
-                        <TextInput
-                            id="website"
-                            type="website"
-                            class="mt-1 block w-full"
-                            v-model="form.website"
-                            required
-                            autofocus
-                        />
+                                <TextInput
+                                    id="email"
+                                    type="email"
+                                    class="mt-1 block w-full"
+                                    v-model="form.email"
+                                    required
+                                    autofocus
+                                />
 
-                        <InputError class="mt-2" :message="form.errors.website" />
+                                <InputError class="mt-2" :message="form.errors.email" />
+                            </div>
+                            <div>
+                                <InputLabel for="website" value="Website" />
+
+                                <TextInput
+                                    id="website"
+                                    type="website"
+                                    class="mt-1 block w-full"
+                                    v-model="form.website"
+                                    required
+                                    autofocus
+                                />
+
+                                <InputError class="mt-2" :message="form.errors.website" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
