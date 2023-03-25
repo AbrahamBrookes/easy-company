@@ -19,6 +19,11 @@ use Inertia\Inertia;
 
 Route::middleware('auth')->group(function () {
 
+    // / should redirect to dashboard
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard', [
             "numCompanies" => \App\Models\Company::count(),
