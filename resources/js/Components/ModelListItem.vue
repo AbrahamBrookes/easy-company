@@ -8,13 +8,13 @@ const props = defineProps({
     },
     href: {
         type: String,
-        default: false,
+        default: null,
     },
 })
 </script>
 <template>
     <li class="py-2 sm:py-3">
-        <component :is="href ? Link : 'div'" class="flex items-center space-x-4 no-underline">
+        <component :is="href ? Link : 'div'" class="flex items-center space-x-4 no-underline" :href="href">
             <div class="flex-shrink-0">
                 <slot name="image">
                     <img class="w-8 h-8" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
