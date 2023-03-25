@@ -24,12 +24,15 @@ class EmployeeController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
+     * Pass a company to pre-select a company_id
      */
-    public function create()
+    public function create(Company $company = null)
     {
         // show our inertia Pages/Employee/Create view
         return Inertia::render('Employee/Create', [
             'companies' => Company::select("id", "name")->get(),
+            'company' => $company,
         ]);
     }
 
