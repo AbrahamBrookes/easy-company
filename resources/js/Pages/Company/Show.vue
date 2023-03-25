@@ -45,6 +45,10 @@ function setFile(file) {
     form.upload = file
 }
 
+function addEmployee() {
+    router.visit(route('employees.create.for-company', props.company.id))
+}
+
 function destroy() {
     if( ! confirm("Are you sure you want to delete this record?")) return
 
@@ -131,8 +135,15 @@ function destroy() {
         </Card>
 
         <Card class="mt-5">
-            <H2>
-                {{  form.name }} employees
+            <H2 class="flex justify-between">
+                {{ form.name }} employees
+                <PrimaryButton
+                    @click="addEmployee"
+                    type="button"
+                    class="ml-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150"
+                >
+                    Add employee
+                </PrimaryButton>
             </H2>
 
             <EmployeesList :items="form.employees" />
