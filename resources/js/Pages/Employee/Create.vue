@@ -21,6 +21,10 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    company: {
+        type: Object,
+        default: null,
+    },
 })
 
 const form = useForm({
@@ -28,7 +32,7 @@ const form = useForm({
     last_name: '',
     email: '',
     phone: '',
-    company_id: ''
+    company_id: props.company ? props.company.id : null,
 })
 
 function save() {
@@ -42,7 +46,7 @@ function cancel() {
     router.visit(route('employees.index'))
 }
 
-const selectedCompany = ref(null)
+const selectedCompany = ref(props.company ? props.company : null)
 function companySelected(company) {
     form.company_id = company.id
     selectedCompany.value = company
