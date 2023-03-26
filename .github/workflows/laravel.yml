@@ -43,11 +43,23 @@ jobs:
     needs: PHPunit
     if: success()
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
+      - name: Composer Install
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
+      - name: NPM install
+        run: npm install
+      - name: NPM run production
+        run: npm run prod
+      - name: Build Storybook
+        run: npm run build-storybook -- --quiet --output-dir=public/storybook -s public
+      - name: rsync to server
+        id: rsync_deploy
+        uses: Pendect/action-rsyncer@v1.1.0
+        env:
+          DEPLOY_KEY: ${{secrets.BDEV_GITHUB_ACTIONS_PRIV}}
         with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
-          script: ls -lah
+          flags: '-avc --delete'
+          options: '--exclude storage'
+          src: '.'
+          dest: '${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:{{ secrets.DEPLOY_PATH }}'
+      - name: Display status from deploy
+        run: echo "${{ steps.deploy.outputs.status }}"
