@@ -38,7 +38,7 @@ class EmployeeBelongsToCompanyTest extends TestCase
 
         // assert that the employee's company is also fetched
         $response->assertInertia(function ($inertia) use ($company) {
-            $inertia->has('employee.data.company.name');
+            $inertia->has('employee.company.name');
         });
     }
 }

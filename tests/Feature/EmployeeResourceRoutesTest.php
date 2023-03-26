@@ -138,7 +138,7 @@ class EmployeeResourceRoutesTest extends TestCase
         $redirectedResponse = $this->followRedirects($response);
 
         $redirectedResponse->assertInertia(function ($inertia) use ($employee) {
-            $inertia->has('employee.data', function ($inertia) use ($employee) {
+            $inertia->has('employee', function ($inertia) use ($employee) {
                 $inertia->where('id', $employee->id);
                 $inertia->where('first_name', $employee->first_name);
                 $inertia->where('last_name', $employee->last_name);
@@ -180,7 +180,7 @@ class EmployeeResourceRoutesTest extends TestCase
         $response = $this->get('/employees/' . $employee->id);
 
         $response->assertInertia(function ($inertia) use ($employee) {
-            $inertia->has('employee.data', function ($inertia) use ($employee) {
+            $inertia->has('employee', function ($inertia) use ($employee) {
                 $inertia->where('id', $employee->id);
                 $inertia->where('first_name', $employee->first_name);
                 $inertia->where('last_name', $employee->last_name);
@@ -203,7 +203,7 @@ class EmployeeResourceRoutesTest extends TestCase
         $response = $this->get('/employees/' . $employee->id);
 
         $response->assertInertia(function ($inertia) use ($employee) {
-            $inertia->has('employee.data.company', function ($inertia) use ($employee) {
+            $inertia->has('employee.company', function ($inertia) use ($employee) {
                 $inertia->where('id', $employee->company->id);
                 $inertia->where('name', $employee->company->name);
                 $inertia->where('logo', $employee->company->logo);
