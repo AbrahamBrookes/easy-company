@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Facade;
 return [
 
     'per_page' => env('PER_PAGE', 10),
+    'date_format' => 'Y-m-d H:i:s',
 
     /*
     |--------------------------------------------------------------------------
