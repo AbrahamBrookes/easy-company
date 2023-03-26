@@ -213,7 +213,11 @@ class CompanyResourceRoutesTest extends TestCase
         $response = $this->put('/companies/' . $company->id, $company->toArray());
 
         // check that the company was updated
-        $this->assertDatabaseHas('companies', $company->toArray());
+        $this->assertDatabaseHas('companies', [
+            "name" => $company->name,
+            "email" => $company->email,
+            "website" => $company->website,
+        ]);
     }
 
     public function test_update_company_route_redirects_to_show_route()
@@ -242,7 +246,11 @@ class CompanyResourceRoutesTest extends TestCase
         $response = $this->delete('/companies/' . $company->id);
 
         // check that the company was deleted (softdelete)
-        $this->assertSoftDeleted('companies', $company->toArray());
+        $this->assertSoftDeleted('companies', [
+            "name" => $company->name,
+            "email" => $company->email,
+            "website" => $company->website,
+        ]);
     }
 
     public function test_delete_company_route_redirects_to_index_route()

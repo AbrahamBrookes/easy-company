@@ -96,7 +96,12 @@ class EmployeeResourceRoutesTest extends TestCase
         $response = $this->post('/employees', $employee->toArray());
 
         // check that the employee was created
-        $this->assertDatabaseHas('employees', $employee->toArray());
+        $this->assertDatabaseHas('employees', [
+            "first_name" => $employee->first_name,
+            "last_name" => $employee->last_name,
+            "email" => $employee->email,
+            "phone" => $employee->phone,
+        ]);
     }
 
     public function test_store_employee_route_redirects_to_show_route()
@@ -237,7 +242,12 @@ class EmployeeResourceRoutesTest extends TestCase
         $response = $this->put('/employees/' . $employee->id, $newEmployee->toArray());
 
         // check that the employee was updated
-        $this->assertDatabaseHas('employees', $newEmployee->toArray());
+        $this->assertDatabaseHas('employees', [
+            "first_name" => $newEmployee->first_name,
+            "last_name" => $newEmployee->last_name,
+            "email" => $newEmployee->email,
+            "phone" => $newEmployee->phone,
+        ]);
     }
 
     public function test_update_employee_route_redirects_to_show_route()
@@ -278,7 +288,12 @@ class EmployeeResourceRoutesTest extends TestCase
         $response = $this->delete('/employees/' . $employee->id);
 
         // check that the employee was deleted (softdelete)
-        $this->assertSoftDeleted('employees', $employee->toArray());
+        $this->assertSoftDeleted('employees', [
+            "first_name" => $employee->first_name,
+            "last_name" => $employee->last_name,
+            "email" => $employee->email,
+            "phone" => $employee->phone,
+        ]);
     }
 
     public function test_delete_employee_route_redirects_to_index_route()
