@@ -53,5 +53,5 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.BDEV_GITHUB_ACTIONS_PUB }}
-          script: deploy.sh
-        
+          script: deployment/deploy.sh
+
