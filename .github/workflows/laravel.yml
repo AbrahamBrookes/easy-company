@@ -50,5 +50,5 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
-          run: pwd
+          script: pwd
 
