@@ -43,11 +43,25 @@ jobs:
     needs: PHPunit
     if: success()
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
-          script: ls -lah
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y php-cli php-mbstring php-xml php-zip unzip nodejs npm
+        npm install -g npm
+        composer install
+        npm install
+        npm run prod
+
+    - name: Deploy to server
+      uses: easingthemes/ssh-deploy@v2.1.6
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
+      with:
+        args: |
+          --exclude ".git*"
+          --exclude "node_modules"
+          --exclude "vendor"
+          ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:{{ secrets.DEPLOY_PATH }}
