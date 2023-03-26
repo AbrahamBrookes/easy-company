@@ -73,15 +73,15 @@ jobs:
           ls -al
           echo $RSYNC_STDOUT
     - name: Post Deployment Serverside Tasks
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
-          script: |
-            cd ${{ secrets.DEPLOY_PATH }}
-            php artisan down
-            php artisan migrate --force
-            php artisan config:cache
-            php artisan up
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
+        script: |
+          cd ${{ secrets.DEPLOY_PATH }}
+          php artisan down
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan up
 
