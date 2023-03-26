@@ -46,12 +46,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Deploy to server
         uses: appleboy/ssh-action@master
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USERNAME: ${{ secrets.DEPLOY_USER }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
+          username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
           script: deployment/deploy.sh
 
