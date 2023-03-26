@@ -77,7 +77,6 @@ function destroy() {
                             class="mt-1 block w-full"
                             v-model="form.last_name"
                             required
-                            autofocus
                         />
 
                         <InputError class="mt-2" :message="form.errors.last_name" />
@@ -91,7 +90,6 @@ function destroy() {
                             class="mt-1 block w-full"
                             v-model="form.email"
                             required
-                            autofocus
                         />
 
                         <InputError class="mt-2" :message="form.errors.email" />
@@ -105,7 +103,6 @@ function destroy() {
                             class="mt-1 block w-full"
                             v-model="form.phone"
                             required
-                            autofocus
                         />
 
                         <InputError class="mt-2" :message="form.errors.phone" />
