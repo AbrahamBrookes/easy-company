@@ -64,7 +64,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
         REMOTE_USER: ${{ secrets.DEPLOY_USER }}
         TARGET: ${{ secrets.DEPLOY_PATH }}
-        EXCLUDE: "storage/*, .git*, .github*, .storybook, deployment, docker, *node_modules, tests, *.example, *.env, *.env.example, docker-compose.yml, phpunit.xml"
+        EXCLUDE: "storage/app/*, .git*, .github*, .storybook, deployment, docker, *node_modules, tests, *.example, *.env, *.env.example, docker-compose.yml, phpunit.xml"
         SCRIPT_BEFORE: |
           whoami
           ls -al
