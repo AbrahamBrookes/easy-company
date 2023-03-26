@@ -32,5 +32,6 @@ Default.args = {
     // this is a paginated resource on index, which laravel will always wrap
     companies: {
         data: fixtures.companies,
+        meta: fixtures.pagination
     }
 }
