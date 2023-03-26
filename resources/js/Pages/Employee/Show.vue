@@ -13,6 +13,7 @@ import InputLabel from '@/Components/Elements/InputLabel.vue';
 import TextInput from '@/Components/Elements/TextInput.vue';
 import PrimaryButton from '@/Components/Elements/PrimaryButton.vue';
 import H2 from '@/Components/Elements/H2.vue';
+import SelectModel from '@/Components/SelectModel.vue';
 
 import CompaniesList from '@/Components/Company/ModelList.vue';
 
@@ -21,6 +22,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    companies: {
+        type: Array,
+        required: false,
+    }
 })
 
 const form = useForm({
@@ -32,6 +37,14 @@ function save() {
         preserveScroll: true
     })
 }
+
+const selectedCompany = ref(props.company ? props.company : null)
+function companySelected(company) {
+    form.company_id = company.id
+    form.company = company
+    selectedCompany.value = company
+}
+
 function destroy() {
     if( ! confirm("Are you sure you want to delete this record?")) return
 
@@ -121,11 +134,20 @@ function destroy() {
         </Card>
 
         <Card class="mt-5">
-            <H2>
-                {{ form.first_name }} {{ form.last_name }} works at:
-            </H2>
+            <div v-if="form.company?.id">
+                <H2>
+                    {{ form.first_name }} {{ form.last_name }} works at:
+                </H2>
 
-            <CompaniesList :items="[form.company]" />
+                <CompaniesList :items="[form.company]" />
+            </div>
+            <div v-else>
+                <H2>
+                    {{ form.first_name }} {{ form.last_name }} does not work at any company
+                </H2>
+
+                <SelectModel @selected="companySelected" :models="companies" label="Select a Company" />
+            </div>
         </Card>
 
 

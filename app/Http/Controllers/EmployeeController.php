@@ -55,7 +55,9 @@ class EmployeeController extends Controller
         // show our inertia Pages/Employee/Show view
         return Inertia::render('Employee/Show', [
             'employee' => new EmployeeResource($employee->load('company')),
-        ]);
+			// only load companies if the employees company_id is null
+			'companies' => $employee->company ? [] : Company::select("id", "name")->get(),
+		]);
     }
 
     /**
