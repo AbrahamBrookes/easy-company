@@ -61,8 +61,8 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
         ARGS: "-avc -i"
         SOURCE: "."
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
+        REMOTE_USER: ${{ secrets.DEPLOY_USER }}
         TARGET: ${{ secrets.DEPLOY_PATH }}
         EXCLUDE: "storage/*, .git*, .github*, .storybook, deployment, docker, *node_modules, tests, *.example, *.env, *.env.example, docker-compose.yml, phpunit.xml"
         SCRIPT_BEFORE: |
