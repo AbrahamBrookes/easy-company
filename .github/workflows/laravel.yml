@@ -54,6 +54,7 @@ jobs:
         composer install
         npm install
         npm run prod
+        npm run build-storybook -- --quiet --o public/storybook -s public
 
     - name: Deploy to server
       uses: easingthemes/ssh-deploy@v2.1.6
