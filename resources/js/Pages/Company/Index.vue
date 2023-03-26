@@ -5,6 +5,7 @@ import Content from '@/Components/Content'
 import Card from '@/Components/Elements/Card'
 import H2 from '@/Components/Elements/H2'
 import PrimaryButton from '@/Components/Elements/PrimaryButton'
+import Pagination from '@/Components/Pagination'
 
 const props = defineProps({
     companies: {
@@ -35,6 +36,9 @@ function create(){
         <Card>
             <ModelList
                 :items="companies.data"
+            />
+            <Pagination
+                :meta="companies.meta"
             />
         </Card>
     </Content>
