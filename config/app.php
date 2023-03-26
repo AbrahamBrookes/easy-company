@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'per_page' => env('PER_PAGE', 10),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

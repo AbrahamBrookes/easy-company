@@ -17,7 +17,7 @@ class CompanyController extends Controller
     {
         // paginated 10 per page
         return Inertia::render('Company/Index', [
-            'companies' => CompanyResource::collection(Company::paginate(10)),
+            'companies' => CompanyResource::collection(Company::paginate(config('app.per_page'))),
         ]);
     }
 

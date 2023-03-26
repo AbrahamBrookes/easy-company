@@ -18,7 +18,7 @@ class EmployeeController extends Controller
     {
         // paginated 10 per page
         return Inertia::render('Employee/Index', [
-            'employees' => EmployeeResource::collection(Employee::paginate(10)),
+            'employees' => EmployeeResource::collection(Employee::paginate(config('app.per_page'))),
         ]);
     }
 
