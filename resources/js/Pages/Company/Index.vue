@@ -37,9 +37,11 @@ function create(){
             <ModelList
                 :items="companies.data"
             />
-            <Pagination
-                :meta="companies.meta"
-            />
+            <div class="flex justify-center">
+                <Pagination
+                    :meta="companies.meta"
+                />
+            </div>
         </Card>
     </Content>
 </template>

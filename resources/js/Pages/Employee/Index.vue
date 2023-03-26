@@ -5,6 +5,7 @@ import Content from '@/Components/Content'
 import Card from '@/Components/Elements/Card'
 import H2 from '@/Components/Elements/H2'
 import PrimaryButton from '@/Components/Elements/PrimaryButton'
+import Pagination from '@/Components/Pagination'
 
 const props = defineProps({
     employees: {
@@ -37,6 +38,11 @@ function create(){
             <ModelList
                 :items="employees.data"
             />
+            <div class="flex justify-center">
+                <Pagination
+                    :meta="employees.meta"
+                />
+            </div>
         </Card>
     </Content>
 </template>
