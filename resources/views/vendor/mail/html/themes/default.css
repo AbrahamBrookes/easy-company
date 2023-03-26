@@ -38,7 +38,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #01696e;
+    color: #7344c9;
     font-size: 17px;
     font-weight: bold;
     margin-top: 0;
@@ -80,7 +80,7 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #e3f9fa;
+    background-color: #edeffb;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -103,7 +103,7 @@ img {
 }
 
 .header a {
-    color: #0ca7b5;
+    color: #8c60da;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -123,9 +123,9 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #e3f9fa;
-    border-bottom: 1px solid #e3f9fa;
-    border-top: 1px solid #e3f9fa;
+    background-color: #edeffb;
+    border-bottom: 1px solid #edeffb;
+    border-top: 1px solid #edeffb;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -136,7 +136,7 @@ img {
     -premailer-cellspacing: 0;
     -premailer-width: 570px;
     background-color: #ffffff;
-    border-color: #e8e5ef;
+    border-color: #f9fafb;
     border-radius: 4px;
     border-width: 1px;
     box-shadow: 0 2px 4px rgba(0, 0, 150, 0.025), 2px 8px 0 rgba(0, 0, 150, 0.015);
@@ -148,7 +148,7 @@ img {
 /* Subcopy */
 
 .subcopy {
-    border-top: 1px solid #e8e5ef;
+    border-top: 1px solid #f9fafb;
     margin-top: 25px;
     padding-top: 25px;
 }
@@ -191,7 +191,7 @@ img {
 }
 
 .table th {
-    border-bottom: 1px solid #edeff2;
+    border-bottom: 1px solid #f9fafb;
     margin: 0;
     padding-bottom: 8px;
 }
@@ -232,11 +232,11 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #01696e;
-    border-bottom: 8px solid #01696e;
-    border-left: 18px solid #01696e;
-    border-right: 18px solid #01696e;
-    border-top: 8px solid #01696e;
+    background-color: #7344c9;
+    border-bottom: 8px solid #7344c9;
+    border-left: 18px solid #7344c9;
+    border-right: 18px solid #7344c9;
+    border-top: 8px solid #7344c9;
 }
 
 .button-green,
@@ -260,12 +260,12 @@ img {
 /* Panels */
 
 .panel {
-    border-left: #01696e solid 4px;
+    border-left: #7344c9 solid 4px;
     margin: 21px 0;
 }
 
 .panel-content {
-    background-color: #e3f9fa;
+    background-color: #edeffb;
     color: #718096;
     padding: 16px;
 }
