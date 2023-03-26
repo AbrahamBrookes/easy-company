@@ -77,9 +77,3 @@ jobs:
       REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
       REMOTE_USER: ${{ secrets.REMOTE_USER }}
       TARGET: ${{ secrets.DEPLOY_PATH }}
-      with:
-        args: |
-          --exclude ".git*"
-          --exclude "node_modules"
-          --exclude "vendor"
-          ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:{{ secrets.DEPLOY_PATH }}
