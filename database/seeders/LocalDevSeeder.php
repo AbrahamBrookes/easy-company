@@ -24,11 +24,20 @@ class LocalDevSeeder extends Seeder
 
         // don't do this for testing - too slow
         if (! app()->environment('testing')) {
-            // factory up 50 companies with 0 to 100 employees
+            // factory up 50 companies with 0 to 10 employees
+            // but don't allow emails to be sent out
+            \App\Models\Company::unsetEventDispatcher();
+
             \App\Models\Company::factory()
-                ->count(50)
-                ->has(\App\Models\Employee::factory()->count(rand(0, 100)))
-                ->create();
+                ->count(rand(32, 64))
+                ->create()
+				->each(function($company){
+					for($i = 0; $i < rand(0, 100); $i++){
+						\App\Models\Employee::factory()
+							->for($company)
+							->create();
+					}
+				});
         }
     }
 }
