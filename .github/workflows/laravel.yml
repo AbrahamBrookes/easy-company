@@ -62,7 +62,7 @@ jobs:
       uses: easingthemes/ssh-deploy@v2.1.6
       env:
         SSH_PRIVATE_KEY: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
-        ARGS: "-avc -i"
+        ARGS: "-avc"
         SOURCE: "."
         REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
         REMOTE_USER: ${{ secrets.DEPLOY_USER }}
