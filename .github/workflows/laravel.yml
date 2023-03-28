@@ -63,7 +63,7 @@ jobs:
       env:
         SSH_PRIVATE_KEY: ${{ secrets.BDEV_GITHUB_ACTIONS_PRIV }}
         ARGS: "-avc"
-        SOURCE: "**"
+        SOURCE: ""
         REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
         REMOTE_USER: ${{ secrets.DEPLOY_USER }}
         TARGET: ${{ secrets.DEPLOY_PATH }}
